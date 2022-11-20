@@ -28,5 +28,6 @@ RUN npm ci --only=production
 # Copy local code to the container image.
 
 RUN npm run build
+
 # Run the web service on container startup.
 CMD [ "npm", "start" ]
