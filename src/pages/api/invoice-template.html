@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slip Gaji</title>
+  <style>
+    body {
+      margin-top: 5rem;
+    }
+
+    .invoice-box {
+      width: 600px;
+      max-width: 800px;
+      margin: auto;
+      padding: 10px;
+      font-size: 12px;
+      line-height: 18px;
+      font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+      color: #555;
+    }
+
+    .invoice-box table {
+      width: 100%;
+      line-height: inherit;
+      text-align: left;
+    }
+
+    .invoice-box table td {
+      padding: 5px;
+      vertical-align: top;
+    }
+
+    .invoice-box table tr td:nth-child(2) {
+      text-align: right;
+    }
+
+    .invoice-box table tr.top table td {
+      padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.top table td.title {
+      font-size: 45px;
+      line-height: 45px;
+      color: #333;
+    }
+
+    .invoice-box table tr.information table td {
+      padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.information2 table td {
+      padding-top: 20px;
+    }
+
+    .invoice-box table tr.heading td {
+      background: #eee;
+      border-bottom: 1px solid #ddd;
+      font-weight: bold;
+    }
+
+    .invoice-box table tr.heading2 td {
+      background: #eee;
+      border-bottom: 1px solid rgb(0, 255, 21);
+      font-weight: bold;
+      padding-top: 10px;
+    }
+
+    .invoice-box table tr.details td {
+      padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.item td {
+      border-bottom: 1px solid #eee;
+    }
+
+    .invoice-box table tr.item.last td {
+      border-bottom: none;
+    }
+
+    .invoice-box table tr.total td:nth-child(2) {
+      border-top: 2px solid #eee;
+      font-weight: bold;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .invoice-box table tr.top table td {
+        width: 100%;
+        display: block;
+        text-align: center;
+      }
+
+      .invoice-box table tr.information table td {
+        width: 100%;
+        display: block;
+        text-align: center;
+      }
+    }
+
+    /** RTL **/
+    .rtl {
+      direction: rtl;
+      font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    }
+
+    .rtl table {
+      text-align: right;
+    }
+
+    .rtl table tr td:nth-child(2) {
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="invoice-box">
+    <table cellpadding="0" cellspacing="0">
+      <tr class="top">
+        <td colspan="2">
+          <table>
+            <tr>
+              <td class="title">
+                <img src="https://cdn.discordapp.com/attachments/509662159177908267/1011621029883424808/logo.png" width="100" max-width="105" height="51" viewBox="0 0 86 86" fill="none">
+              </td>
+              <td>
+                Slip Gaji PT. Sentra Support Service #{{id}} <br>
+                Bulan: {{salaryDate}} <br>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr class="information">
+        <td colspan="2">
+          <table>
+            <tr>
+              <td>
+               {{perusahaan}} - {{jobSkill}} <br>
+                BPJSKES - {{bpjsKesehatan}} <br>
+                BPJSTK - {{bpjsTK}}
+              </td>
+              <td>
+                {{fullName}} <br>
+                ID Pegawai - {{employeeID}}<br>
+                NO.Rek - {{noRekening}}
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr class="heading">
+        <td>
+          Detail Gaji Kotor
+        </td>
+        <td>
+        </td>
+      </tr>
+      <tr class="item">
+        <td>
+          Gaji Pokok
+        </td>
+        <td>
+          {{baseSalary}}
+        </td>
+      </tr>
+      <tr class="item">
+        <td>
+          Insentif
+        </td>
+        <td>
+          {{insentif}}
+        </td>
+      </tr>
+      <tr class="item">
+        <td>
+          OverTime
+        </td>
+        <td>
+          {{OT}}
+        </td>
+      </tr>
+      <tr class="item">
+        <td>
+          Selisih Gaji
+        </td>
+        <td>
+          {{salaryDifferencePlus}}
+        </td>
+      </tr>
+      <tr class="item">
+        <td>
+          OT BKO / LP
+        </td>
+        <td>
+          {{OTBKOorLP}}
+        </td>
+      </tr>
+      <tr class="item">
+        <td>
+          OT Lalu
+        </td>
+        <td>
+          {{OTLalu}}
+        </td>
+      </tr>
+      <tr class="item last">
+        <td>
+          LP BL
+        </td>
+        <td>
+         {{LPBL}}
+        </td>
+      </tr>
+      <tr class="total">
+        <td></td>
+        <td>
+          {{sumSalaryPlus}}
+        </td>
+      </tr>
+      <tr class="heading">
+        <td>
+          Detail Potongan
+        </td>
+        <td>
+        </td>
+      </tr>
+      <tr class="item">
+        <td>
+          Absensi
+        </td>
+        <td>
+          {{absensi}}
+        </td>
+      </tr>
+      <tr class="item">
+        <td>
+          Selisih Gaji
+        </td>
+        <td>
+          {{salaryDifferenceMin}}
+        </td>
+      </tr>
+      <tr class="item">
+        <td>
+          BPJS TK
+        </td>
+        <td>
+          {{BPJSTK}}
+        </td>
+      </tr>
+      <tr class="item">
+        <td>
+          BPJS KES
+        </td>
+        <td>
+          {{BPJSKES}}
+        </td>
+      </tr>
+      <tr class="item">
+        <td>
+          PPH21
+        </td>
+        <td>
+          {{PPH21}}
+        </td>
+      </tr>
+      <tr class="item">
+        <td>
+          Selisih Gaji
+        </td>
+        <td>
+          {{salaryDifferenceMin}}
+        </td>
+      </tr>
+      <tr class="item">
+        <td>
+          Potongan 1
+        </td>
+        <td>
+          {{other1}}
+        </td>
+      </tr>
+      <tr class="item">
+        <td>
+          Potongan 2
+        </td>
+        <td>
+          {{other2}}
+        </td>
+      </tr>
+      <tr class="item last">
+        <td>
+          Potongan 3
+        </td>
+        <td>
+          {{other3}}
+        </td>
+      </tr>
+      <tr class="total">
+        <td></td>
+        <td>
+          {{sumSalaryMin}}
+        </td>
+      </tr>
+      <tr class="heading2">
+        <td>
+          Gaji diterima
+        </td>
+        <td>
+          {{sumSalary}}
+        </td>
+      </tr>
+      {{#if keteranganPotongan}}
+      <tr>
+        <td>
+          <p align="left">*Keterangan Potongan: {{keteranganPotongan}}</p>
+        </td>
+        <td>
+        </td>
+      </tr>
+      {{/if}}
+
+      <tr class="information2">
+        <td colspan="2">
+          <table>
+            <tr>
+              <td align="center">
+               Penerima <br>
+               <br>
+               <br>
+                {{fullName}} <br>
+              </td>
+              <td>
+                <br>
+                <br>
+                <br>
+                PT. SENTRA SUPPORT SERVICE
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+
+<footer>
+
+</footer>
+
+</html>
